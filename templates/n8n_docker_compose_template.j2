@@ -23,7 +23,7 @@ services:
       - "{{ COMMON_DOCKER_NETWORK_NAME }}"
 
   n8n_pgadmin: # Отдельный PgAdmin
-    container_name: m8m_pgadmin
+    container_name: n8n_pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
