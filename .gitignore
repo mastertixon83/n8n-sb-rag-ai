@@ -1,0 +1,10 @@
+/n8n_data/
+/n8n_pgadmin_data/
+/n8n_postgres_data/
+/supabase-project/
+/venv/
+/docker-compose.yml
+/.env
+/.idea
+/summary.txt
+/README.md
