@@ -52,7 +52,7 @@
 
 1.  **Клонируйте репозиторий инсталлятора:**
 
-        git clone [https://github.com/ВАШ_ПОЛЬЗОВАТЕЛЬ/ВАШ_РЕПОЗИТОРИЙ.git](https://github.com/ВАШ_ПОЛЬЗОВАТЕЛЬ/ВАШ_РЕПОЗИТОРИЙ.git)
+        git clone https://github.com/mastertixon83/n8n-sb-rag-ai.git
         cd ВАШ_РЕПОЗИТОРИЙ
 
 
