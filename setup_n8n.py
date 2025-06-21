@@ -38,7 +38,7 @@ def setup_n8n(config: AppConfig):
     compose_vars = {
         "N8N_POSTGRES_USER": config.n8n_postgres_user,
         "N8N_POSTGRES_DATABASE": config.n8n_postgres_db,
-        "N8N_POSTGRES_PORT": 5432,
+        "N8N_POSTGRES_PORT": config.n8n_postgres_port,
         "N8N_PGADMIN_EMAIL": config.n8n_pgadmin_email,
         "COMMON_DOCKER_NETWORK_NAME": config.common_docker_network_name,
         "N8N_POSTGRES_TYPE": "postgresdb",

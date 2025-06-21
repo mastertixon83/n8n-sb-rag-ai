@@ -32,6 +32,7 @@ class AppConfig:
         self.n8n_generic_timezone = "Europe/Moscow"
         self.cloudflare_tunnel_token = ""
         self.n8n_webhook_url = ""
+        self.n8n_postgres_port = 5432
 
         # Supabase
         self.supabase_postgres_password = os.getenv("SUPABASE_POSTGRES_PASSWORD")
@@ -140,6 +141,8 @@ class AppConfig:
                 "Введите токен для cCloudFlare: ")
         if not self.n8n_webhook_url:
             self.n8n_webhook_url = input("Ведите wbhook url: ")
+        if not self.n8n_postgres_port:
+            self.n8n_postgres_port = input("Ведите порт для Postgres N8N: ")
         if not self.supabase_openai_api_key:
             self.supabase_openai_api_key = input("Введите OpenAi Api Token: ")
 
