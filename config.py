@@ -140,7 +140,7 @@ class AppConfig:
             self.cloudflare_tunnel_token = input(
                 "Введите токен для cCloudFlare: ")
         if not self.n8n_webhook_url:
-            self.n8n_webhook_url = input("Ведите wbhook url: ")
+            self.n8n_webhook_url = input("Ведите webhook url: ")
         if not self.n8n_postgres_port:
             self.n8n_postgres_port = input("Ведите порт для Postgres N8N: ")
         if not self.supabase_openai_api_key:
