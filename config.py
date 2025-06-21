@@ -32,7 +32,7 @@ class AppConfig:
         self.n8n_generic_timezone = "Europe/Moscow"
         self.cloudflare_tunnel_token = ""
         self.n8n_webhook_url = ""
-        self.n8n_postgres_port = 5432
+        self.n8n_postgres_port = ""
 
         # Supabase
         self.supabase_postgres_password = os.getenv("SUPABASE_POSTGRES_PASSWORD")
