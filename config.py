@@ -45,7 +45,7 @@ class AppConfig:
         self.supabase_vault_enc_key = os.getenv("SUPABASE_VAULT_ENC_KEY")
 
         self.supabase_postgres_host = os.getenv("SUPABASE_POSTGRES_HOST", "db")  # Внутри Docker Compose
-        self.supabase_postgres_port = int(os.getenv("SUPABASE_POSTGRES_PORT", 5432))  # Внутренний порт DB
+        self.supabase_postgres_port = int(os.getenv("SUPABASE_POSTGRES_PORT", 5435))  # Внутренний порт DB
         self.supabase_postgres_db = os.getenv("SUPABASE_POSTGRES_DB", "postgres")
 
         self.supabase_pooler_proxy_port_transaction = int(os.getenv("SUPABASE_POOLER_PROXY_PORT_TRANSACTION", 6543))

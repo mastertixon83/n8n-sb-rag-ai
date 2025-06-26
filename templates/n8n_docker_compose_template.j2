@@ -35,7 +35,7 @@ services:
       n8n_postgres:
         condition: service_healthy
     volumes:
-      - n8n_pgadmin_data:/var/lib/pgadmin
+      - ./n8n_pgadmin_data:/var/lib/pgadmin
     networks:
       - "{{ COMMON_DOCKER_NETWORK_NAME }}"
 
@@ -66,12 +66,13 @@ services:
     ports:
       - "443:5678"
     volumes:
-      - ./n8n_data:/home/node/.n8n
+      - ./n8n_data:/root/.n8n
     depends_on:
       n8n_postgres:
         condition: service_healthy
     networks:
       - "{{ COMMON_DOCKER_NETWORK_NAME }}"
+    user: "0:0"
 
   cloudflare_tunnel:
     container_name: cloudflare_tunnel
@@ -99,11 +100,6 @@ services:
     environment:
       INBUCKET_WEB_ADDR: "0.0.0.0:9000"
       INBUCKET_SMTP_ADDR: "0.0.0.0:25"
-
-volumes:
-  n8n_postgres_data:
-  n8n_pgadmin_data:
-  n8n_data:
 
 networks:
   "{{ COMMON_DOCKER_NETWORK_NAME }}":
