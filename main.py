@@ -76,7 +76,8 @@ def install(force):
         ➡ Supabase Studio: http://localhost:{config.supabase_studio_port}
            Login: {config.supabase_dashboard_username}
            Pass:  {config.supabase_dashboard_password}
-
+        
+        - URL для подключения к Supabase - http://supabase-kong:8000 
         🗝 Supabase SERVICE_ROLE_KEY: {config.supabase_service_role_key}
         """
         with open("summary.txt", "w", encoding="utf-8") as file:
