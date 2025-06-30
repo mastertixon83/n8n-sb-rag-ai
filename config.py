@@ -20,9 +20,9 @@ class AppConfig:
         self.skip_inputs = skip_inputs  # <-- И ДОБАВЛЕНИЕ ЭТОЙ СТРОКИ
 
         # N8N
+        self.server = "local"
         self.n8n_postgres_password = ""
         self.n8n_pgadmin_password = ""
-        self.n8n_ngrok_authtoken = ""
         self.n8n_openai_api_key = ""
         self.n8n_inbucket_web_port = 9000
         self.n8n_file_permissions = ""
@@ -129,6 +129,9 @@ class AppConfig:
         # Здесь логика, которая запрашивает у пользователя данные,
         # если self.n8n_postgres_password и т.д. None или пустые.
         # Например:
+        self.server = input(
+            "На каком серверре будем разворачивать локальном (local) или vps: "
+        )
         if not self.n8n_postgres_password:
             self.n8n_postgres_password = input(
                 "Введите пароль для n8n PostgreSQL (оставьте пустым для автогенерации):")
@@ -136,7 +139,7 @@ class AppConfig:
                 self.n8n_postgres_password = generate_random_string(32)
                 logger.info(f"Сгенерирован пароль для n8n PostgreSQL: {self.n8n_postgres_password}")
 
-        if not self.n8n_ngrok_authtoken:
+        if self.server.lower() == "local":
             self.cloudflare_tunnel_token = input(
                 "Введите токен для cCloudFlare: ")
         if not self.n8n_webhook_url:
