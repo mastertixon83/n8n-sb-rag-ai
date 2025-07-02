@@ -129,9 +129,9 @@ class AppConfig:
         # Здесь логика, которая запрашивает у пользователя данные,
         # если self.n8n_postgres_password и т.д. None или пустые.
         # Например:
-        self.server = input(
-            "На каком серверре будем разворачивать локальном (local) или vps: "
-        )
+        # self.server = input(
+        #     "На каком серверре будем разворачивать локальном (local) или vps: "
+        # )
         if not self.n8n_postgres_password:
             self.n8n_postgres_password = input(
                 "Введите пароль для n8n PostgreSQL (оставьте пустым для автогенерации):")

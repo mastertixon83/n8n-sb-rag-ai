@@ -88,22 +88,23 @@ def setup_n8n(config: AppConfig):
         f.write(rendered_env)
     logger.success(f".env успешно сгенерирован.")
 
-    # Генерация настроек NGINX
-    nginx_n8n_vars = {
-        "N8N_HOST": parsed_url.netloc,
-    }
-    rendered_env = n8n_nginx_template.render(nginx_n8n_vars)
-    with open(n8n_nginx_file_path, 'w') as f:
-        f.write(rendered_env)
-    logger.success(f"Настройки NGINX успешно сохронены.")
+    if config.server != "local":
+        # Генерация настроек NGINX
+        nginx_n8n_vars = {
+            "N8N_HOST": parsed_url.netloc,
+        }
+        rendered_env = n8n_nginx_template.render(nginx_n8n_vars)
+        with open(n8n_nginx_file_path, 'w') as f:
+            f.write(rendered_env)
+        logger.success(f"Настройки NGINX успешно сохронены.")
 
-    nginx_n8n_vars = {
-        "N8N_HOST": parsed_url.netloc,
-    }
-    rendered_env = n8n_nginx_conf_d_template.render(nginx_n8n_vars)
-    with open(n8n_nginx_conf_d_file_path, 'w') as f:
-        f.write(rendered_env)
-    logger.success(f"Настройки NGINX успешно сохронены.")
+        nginx_n8n_vars = {
+            "N8N_HOST": parsed_url.netloc,
+        }
+        rendered_env = n8n_nginx_conf_d_template.render(nginx_n8n_vars)
+        with open(n8n_nginx_conf_d_file_path, 'w') as f:
+            f.write(rendered_env)
+        logger.success(f"Настройки NGINX успешно сохронены.")
 
     # Проверяем и создаем общую Docker сеть
     logger.info(f"Проверяем и создаем Docker сеть: {config.common_docker_network_name}")
