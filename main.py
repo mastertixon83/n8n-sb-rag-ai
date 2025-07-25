@@ -51,10 +51,10 @@ def install(force):
         setup_n8n(config)
         logger.success("✅ Стек n8n успешно установлен и запущен!")
 
-        # # 3. Устанавливаем Supabase стек
-        # logger.info("\n▶️ Начинаем установку Supabase стека...")
-        # setup_supabase(config)
-        # logger.success("✅ Стек Supabase успешно установлен и запущен!")
+        # 3. Устанавливаем Supabase стек
+        logger.info("\n▶️ Начинаем установку Supabase стека...")
+        setup_supabase(config)
+        logger.success("✅ Стек Supabase успешно установлен и запущен!")
 
         summary_text = f"""
         🎉 Все компоненты (n8n, Supabase) успешно установлены и запущены!
@@ -75,7 +75,7 @@ def install(force):
            Port: {config.n8n_postgres_port}
            
        ➡ Доступ к Postgres Supabase:
-           HOST: localhost
+           HOST: supabase-db
            DB:   {config.supabase_postgres_db}
            User: {config.supabase_dashboard_username}
            Pass: {config.supabase_postgres_password}

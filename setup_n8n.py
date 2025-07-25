@@ -130,7 +130,7 @@ def setup_n8n(config: AppConfig):
     # Запуск Docker Compose для n8n
     logger.info(f"Запускаем Docker Compose для n8n. Это может занять некоторое время...")
     try:
-        # run_command(["docker", "compose", "-f", n8n_docker_compose_path, "--env-file", n8n_env_file_path, "up", "-d"])
+        run_command(["docker", "compose", "-f", n8n_docker_compose_path, "--env-file", n8n_env_file_path, "up", "-d"])
         logger.success("✅ Стек n8n успешно запущен!")
 
     except Exception as e:
