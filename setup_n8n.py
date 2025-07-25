@@ -23,17 +23,18 @@ def setup_n8n(config: AppConfig):
     n8n_data_dir = os.path.join(project_root, 'n8n_data')
     n8n_postgres_data_dir = os.path.join(project_root, 'n8n_postgres_data')
     n8n_pgadmin_data_dir = os.path.join(project_root, 'n8n_pgadmin_data')
+    n8n_dockerfile_path = os.path.join(project_root, 'Dockerfile')  # Dockerfile находится в корне проекта
 
-    n8n_nginx_dir = os.path.join(project_root, 'nginx')
-    n8n_nginx_conf_d_dir = os.path.join(n8n_nginx_dir, 'conf.d' if config.server.lower() == "local" else "conf.d_vps")
-    n8n_nginx_file_path = os.path.join(n8n_nginx_dir, 'nginx.conf')
-    n8n_nginx_conf_d_file_path = os.path.join(n8n_nginx_conf_d_dir, "n8n.conf")
+    # n8n_nginx_dir = os.path.join(project_root, 'nginx')
+    # n8n_nginx_conf_d_dir = os.path.join(n8n_nginx_dir, 'conf.d' if config.server.lower() == "local" else "conf.d_vps")
+    # n8n_nginx_file_path = os.path.join(n8n_nginx_dir, 'nginx.conf')
+    # n8n_nginx_conf_d_file_path = os.path.join(n8n_nginx_conf_d_dir, "n8n.conf")
 
-    # Создаем необходимые директории для данных, если они не существуют
-    for directory in [n8n_nginx_conf_d_dir]:
-    # for directory in [n8n_data_dir, n8n_postgres_data_dir, n8n_pgadmin_data_dir, n8n_nginx_dir, n8n_nginx_conf_d_dir]:
-        os.makedirs(directory, exist_ok=True)
-        logger.info(f"Проверена/создана директория для данных: {directory}")
+    # # Создаем необходимые директории для данных, если они не существуют
+    # for directory in [n8n_nginx_conf_d_dir]:
+    # # for directory in [n8n_data_dir, n8n_postgres_data_dir, n8n_pgadmin_data_dir, n8n_nginx_dir, n8n_nginx_conf_d_dir]:
+    #     os.makedirs(directory, exist_ok=True)
+    #     logger.info(f"Проверена/создана директория для данных: {directory}")
 
     # Инициализируем Jinja2 для загрузки шаблонов
     env = Environment(loader=FileSystemLoader(templates_dir))
@@ -88,23 +89,23 @@ def setup_n8n(config: AppConfig):
         f.write(rendered_env)
     logger.success(f".env успешно сгенерирован.")
 
-    if config.server != "local":
-        # Генерация настроек NGINX
-        nginx_n8n_vars = {
-            "N8N_HOST": parsed_url.netloc,
-        }
-        rendered_env = n8n_nginx_template.render(nginx_n8n_vars)
-        with open(n8n_nginx_file_path, 'w') as f:
-            f.write(rendered_env)
-        logger.success(f"Настройки NGINX успешно сохронены.")
-
-        nginx_n8n_vars = {
-            "N8N_HOST": parsed_url.netloc,
-        }
-        rendered_env = n8n_nginx_conf_d_template.render(nginx_n8n_vars)
-        with open(n8n_nginx_conf_d_file_path, 'w') as f:
-            f.write(rendered_env)
-        logger.success(f"Настройки NGINX успешно сохронены.")
+    # if config.server != "local":
+    #     # Генерация настроек NGINX
+    #     nginx_n8n_vars = {
+    #         "N8N_HOST": parsed_url.netloc,
+    #     }
+    #     rendered_env = n8n_nginx_template.render(nginx_n8n_vars)
+    #     with open(n8n_nginx_file_path, 'w') as f:
+    #         f.write(rendered_env)
+    #     logger.success(f"Настройки NGINX успешно сохронены.")
+    #
+    #     nginx_n8n_vars = {
+    #         "N8N_HOST": parsed_url.netloc,
+    #     }
+    #     rendered_env = n8n_nginx_conf_d_template.render(nginx_n8n_vars)
+    #     with open(n8n_nginx_conf_d_file_path, 'w') as f:
+    #         f.write(rendered_env)
+    #     logger.success(f"Настройки NGINX успешно сохронены.")
 
     # Проверяем и создаем общую Docker сеть
     logger.info(f"Проверяем и создаем Docker сеть: {config.common_docker_network_name}")
@@ -115,6 +116,17 @@ def setup_n8n(config: AppConfig):
     except Exception as e:
         logger.warning(f"Не удалось создать Docker сеть (возможно, уже существует): {e}")
 
+    # --- НОВОЕ: Сборка кастомного Docker образа n8n ---
+    logger.info(
+        f"Собираем кастомный Docker образ n8n из {n8n_dockerfile_path}. Это может занять некоторое время...")
+    try:
+        # Убедимся, что команда выполняется в директории, где лежит Dockerfile
+        # В данном случае, это project_root
+        run_command(["docker", "build", "-t", "custom-n8n:latest", "."], cwd=project_root)
+        logger.success("✅ Кастомный образ n8n успешно собран!")
+    except Exception as e:
+        logger.error(f"❌ Ошибка при сборке кастомного образа n8n: {e}")
+        raise  # Перебрасываем ошибку
     # Запуск Docker Compose для n8n
     logger.info(f"Запускаем Docker Compose для n8n. Это может занять некоторое время...")
     try:

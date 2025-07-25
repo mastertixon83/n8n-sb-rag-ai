@@ -45,7 +45,8 @@ services:
     dns:
       - 8.8.8.8
       - 1.1.1.1
-    image: n8nio/n8n
+    # image: n8nio/n8n
+    build: .
     restart: always
     environment:
       DB_TYPE: "{{ N8N_POSTGRES_TYPE }}"

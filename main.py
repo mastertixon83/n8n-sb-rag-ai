@@ -70,6 +70,14 @@ def install(force):
            DB:   {config.n8n_postgres_db}
            User: {config.n8n_postgres_user}
            Pass: {config.n8n_postgres_password}
+           Port: {config.n8n_postgres_port}
+           
+       ➡ Доступ к Postgres Supabase:
+           HOST: localhost
+           DB:   {config.supabase_postgres_db}
+           User: {config.supabase_dashboard_username}
+           Pass: {config.supabase_postgres_password}
+           Port: {config.supabase_postgres_port}     
 
         ➡ Inbucket (почта): http://localhost:{config.n8n_inbucket_web_port}
 
