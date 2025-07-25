@@ -33,6 +33,7 @@ class AppConfig:
         self.cloudflare_tunnel_token = ""
         self.n8n_webhook_url = ""
         self.n8n_postgres_port = ""
+        self.n8n_editor_base_url = "http://localhost:5678"
 
         # Supabase
         self.supabase_postgres_password = os.getenv("SUPABASE_POSTGRES_PASSWORD")

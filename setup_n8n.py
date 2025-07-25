@@ -60,7 +60,7 @@ def setup_n8n(config: AppConfig):
             "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS": config.n8n_file_permissions if config.n8n_file_permissions else "false",
             "N8N_INBUCKET_WEB_PORT": config.n8n_inbucket_web_port,
             "N8N_WEBHOOK_URL": config.n8n_webhook_url,
-            "N8N_EDITOR_BASE_URL": "http://localhost:5678",
+            "N8N_EDITOR_BASE_URL": config.n8n_editor_base_url,
             "N8N_HOST": parsed_url.netloc,
             **({
                 "CLOUDFLARE_TUNNEL_TOKEN": config.cloudflare_tunnel_token
