@@ -111,7 +111,7 @@ def setup_n8n(config: AppConfig):
     logger.info(f"Проверяем и создаем Docker сеть: {config.common_docker_network_name}")
     try:
         # check=False, потому что docker network create вернет ошибку, если сеть уже существует
-        # run_command(["docker", "network", "create", config.common_docker_network_name], check=False, capture_output=False)
+        run_command(["docker", "network", "create", config.common_docker_network_name], check=False, capture_output=False)
         logger.success(f"Docker сеть '{config.common_docker_network_name}' создана или уже существовала.")
     except Exception as e:
         logger.warning(f"Не удалось создать Docker сеть (возможно, уже существует): {e}")

@@ -23,13 +23,13 @@ def cli():
 @click.option('--force', is_flag=True, help='Принудительно перезаписать существующие конфигурации и пропустить интерактивный ввод.')
 def install(force):
     """
-    python main.py install
-    python main.py destroy
+    python main.py install -
+    python main.py destroy - Удаляет все установленные сервисы (n8n, Supabase) и связанные данные/конфигурации.
     sudo rm -rf n8n_* supabase-project/
 
     python main.py restart --stack n8n
     python main.py restart --stack all
-    python main.py restart --stack n8n --resreate
+    python main.py restart --stack n8n --resreate - Полностью пересоздать Supabase стек (удалить и пересоздать все тома)
     python main.py restart --stack all --resreate
 
     Устанавливает и настраивает все необходимые компоненты (n8n, Supabase).
