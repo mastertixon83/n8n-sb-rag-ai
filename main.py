@@ -59,7 +59,9 @@ def install(force):
         summary_text = f"""
         🎉 Все компоненты (n8n, Supabase) успешно установлены и запущены!
 
-        ➡ Доступ к N8N: {config.n8n_webhook_url}
+        ➡ Доступ к N8N: localhost:5678
+          Web Hook Url N8N: {config.n8n_webhook_url}
+        
         
         ➡ Доступ к PGAdmin: http://0.0.0.0:5051/login?next=/ 
            Login: {config.n8n_pgadmin_email}
