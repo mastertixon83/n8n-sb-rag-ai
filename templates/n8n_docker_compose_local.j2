@@ -68,6 +68,7 @@ services:
       - "5678:5678"
     volumes:
       - ./n8n_data:/root/.n8n
+      - ./projects:/data/projects
     depends_on:
       n8n_postgres:
         condition: service_healthy
